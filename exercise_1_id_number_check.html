@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 1. ID Number Check</title>
+</head>
+<body>
+    <h2>주민등록번호 유효성 확인</h2>
+
+    <script>
+        "use strict";
+
+        while(true) {
+            let inputNum = prompt(`✔주민등록번호 유효성 확인✔\n\n'-'를 제외한 주민등록번호를 띄어쓰기 없이 입력해 주세요.`);
+            let idNum = inputNum.split("");
+            if(idNum.length !== 13 || isNaN(Number(inputNum))) {
+                alert(`❗ 잘못된 형식입니다. ❗\n다시 입력해 주세요.`)
+                continue;
+            } else {
+                const mulNum = [2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5]
+                let lastNum = Number(idNum[12]);
+                let sum = 0;
+                for(let i = 0; i <= mulNum.length-1; i++) {
+                    sum += Number(idNum[i]) * mulNum[i]; 
+                }
+                let checkNum = (11 - (sum % 11)) % 10;;
+                if(checkNum !== lastNum) {
+                    alert(`❌ 유효하지 않은 번호입니다. ❌\n확인 후 다시 입력해 주세요.`)
+                    continue;
+                } else {
+                    alert(`👌 유효한 주민등록번호입니다. 👌`)
+                    break; 
+                }
+            }
+        }
+    </script>
+</body>
+</html>
